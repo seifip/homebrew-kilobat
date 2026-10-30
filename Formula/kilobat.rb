@@ -1,8 +1,8 @@
 class Kilobat < Formula
   desc "macOS network diagnostics CLI and MCP server"
   homepage "https://kilobat.app"
-  url "https://github.com/seifip/kilobat-cli/archive/refs/tags/v0.10.0.tar.gz"
-  sha256 "f2ee2bd5f334f9c04e385a704da8d3f1b7833b9c35c1fff756554eceeeea4523"
+  url "https://github.com/seifip/kilobat-cli/archive/refs/tags/v0.11.0.tar.gz"
+  sha256 "0ef971c5143207810c52dc35b5c81ff81737571aa39a983d3fcfb7c43cec3e15"
   license "GPL-3.0-only"
 
   depends_on macos: :sonoma
