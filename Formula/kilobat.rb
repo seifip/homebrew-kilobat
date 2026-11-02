@@ -1,22 +1,31 @@
 class Kilobat < Formula
   desc "macOS network diagnostics CLI and MCP server"
   homepage "https://kilobat.app"
-  url "https://github.com/seifip/kilobat-cli/archive/refs/tags/v0.20.0.tar.gz"
-  sha256 "0d9f5d6f6a9bd978f2bb2fe9fd266943f013456d87b666c0e91cf9203708e112"
-  license "GPL-3.0-only"
+  url "https://github.com/seifip/kilobat-cli/archive/refs/tags/v0.30.0.tar.gz"
+  sha256 "23be880fc30a73df27d89963f07c142fe941525b4e9a4df6769d6e5cfa74d161"
+  license all_of: ["GPL-3.0-only", "CC-BY-4.0", "BSD-2-Clause"]
 
   depends_on macos: :sonoma
   depends_on xcode: ["16.0", :build]
 
   def install
     system "swift", "build", "-c", "release", "--disable-sandbox"
-    bin.install ".build/release/kilobat"
+    # SwiftPM's generated Bundle.module accessor finds the bundle beside the real executable.
+    libexec.install ".build/release/kilobat"
+    libexec.install ".build/release/KilobatCLI_KilobatCore.bundle"
+    bin.write_exec_script libexec/"kilobat"
     bin.install_symlink "kilobat" => "kb"
+    doc.install "THIRD_PARTY_NOTICES.md"
   end
 
   test do
     assert_match "Kilobat #{version}", shell_output("#{bin}/kb --version")
     assert_match "Kilobat #{version}", shell_output("#{bin}/kilobat --version")
     assert_match "MCP server", shell_output("#{bin}/kilobat mcp --help")
+    %w[countries.deflate centroids.json oui.deflate networks.deflate].each do |name|
+      bundle = libexec/"KilobatCLI_KilobatCore.bundle"
+      resources = (bundle/"Contents/Resources").directory? ? bundle/"Contents/Resources" : bundle
+      assert_path_exists resources/name
+    end
   end
 end
