@@ -1,8 +1,8 @@
 class Kilobat < Formula
   desc "macOS network diagnostics CLI and MCP server"
   homepage "https://kilobat.app"
-  url "https://github.com/seifip/kilobat-cli/archive/refs/tags/v0.30.0.tar.gz"
-  sha256 "23be880fc30a73df27d89963f07c142fe941525b4e9a4df6769d6e5cfa74d161"
+  url "https://github.com/seifip/kilobat-cli/archive/refs/tags/v0.45.0.tar.gz"
+  sha256 "70f5e2b8a46a75111440818d13038eeccf9e2a85de854104d0ed46c6b389e3c9"
   license all_of: ["GPL-3.0-only", "CC-BY-4.0", "BSD-2-Clause"]
 
   depends_on macos: :sonoma
@@ -22,7 +22,7 @@ class Kilobat < Formula
     assert_match "Kilobat #{version}", shell_output("#{bin}/kb --version")
     assert_match "Kilobat #{version}", shell_output("#{bin}/kilobat --version")
     assert_match "MCP server", shell_output("#{bin}/kilobat mcp --help")
-    %w[countries.deflate centroids.json oui.deflate networks.deflate].each do |name|
+    %w[countries.deflate centroids.json oui.deflate networks.deflate explainer.json].each do |name|
       bundle = libexec/"KilobatCLI_KilobatCore.bundle"
       resources = (bundle/"Contents/Resources").directory? ? bundle/"Contents/Resources" : bundle
       assert_path_exists resources/name
