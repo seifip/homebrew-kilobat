@@ -1,8 +1,8 @@
 cask "kilobat" do
-  version "1.40.10"
-  sha256 "301777608c07f6c9d612bcc0937bfdc2756d6520f727ce03f8b8ee7f301ce535"
+  version "1.40.11"
+  sha256 "74945da50ba3bfc5dcb79b351869ae2066a31d58acc9530fefb8a179d00167b7"
 
-  url "https://kilobat.app/downloads/Kilobat-1.40.10.dmg"
+  url "https://kilobat.app/downloads/Kilobat-1.40.11.dmg"
   name "Kilobat"
   desc "Menu-bar network monitor: per-app traffic, Wi-Fi diagnostics and data budgets"
   homepage "https://kilobat.app/"
